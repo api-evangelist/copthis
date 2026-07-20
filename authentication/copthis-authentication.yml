@@ -1,0 +1,14 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/copthis-partner-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic Authentication over HTTPS. Merchbar recommends a randomly generated
+    token as the username and a blank password. Non-TLS connections are rejected.
+  sources:
+  - openapi/copthis-partner-api-openapi.yml
