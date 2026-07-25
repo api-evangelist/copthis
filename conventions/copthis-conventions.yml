@@ -1,0 +1,101 @@
+generated: '2026-07-18'
+method: searched
+source: >-
+  https://github.com/CopThis/partner-api/blob/master/partner_api.md — the
+  cross-cutting request/response conventions that apply to every Merchbar
+  Partner API endpoint, captured from the published contract and cross-checked
+  against openapi/copthis-partner-api-openapi.yml.
+description: >-
+  How the Merchbar Partner API behaves across every operation: authentication,
+  transport, request formats, the JSON response envelope, pagination,
+  versioning, data-type conventions (prices, dates, identifiers), the error
+  envelope, and the staging/production separation partners must implement.
+
+api_style: REST over HTTPS, JSON request bodies and JSON responses
+base_url_pattern: https://{partnerHost}/v1
+
+authentication:
+  scheme: HTTP Basic Authentication over HTTPS
+  detail: >-
+    A base64-encoded username:password pair; Merchbar recommends a randomly
+    generated token as the username and a blank password. Non-TLS connections
+    are rejected. Only one credential pair is used at a time, and credentials
+    must be revocable/rotatable.
+  reference: authentication/copthis-authentication.yml
+  docs: https://github.com/CopThis/partner-api/blob/master/partner_api.md#security-and-authentication
+
+transport:
+  https_required: true
+  tls_recommendation: Mozilla Modern Compatibility cipher suites
+
+request_formats:
+  get: Parameters passed as URL query parameters.
+  post_patch: >-
+    HTTP body is a single JSON object with all information needed to perform the
+    action. PATCH accepts partial representations; omitted fields are left
+    unchanged.
+  mutation_methods: [POST, PATCH]
+
+response_envelope:
+  success:
+    status: 200
+    key: data
+    shape: >-
+      Object for single-entity GETs and POSTs; array for collection GETs. Any
+      200 is treated as success.
+  error:
+    key: error
+    detail: See errors/copthis-problem-types.yml — 4xx/5xx with a top-level `error`.
+  reference: errors/copthis-problem-types.yml
+
+idempotency:
+  supported: false
+  detail: >-
+    The published contract does not define an idempotency-key mechanism. GET
+    requests are inherently idempotent; order creation is not de-duplicated by a
+    client-supplied key. No `Idempotency-Key` header is documented.
+
+pagination:
+  style: offset (page-number)
+  supported_on: [listStores, listStoreMerch]
+  request_params:
+    per_page: Page size (optional).
+    page: Current page number, 1-indexed (optional).
+  response_fields:
+    current_page: The current page (1-indexed).
+    per_page: Page size.
+    total_pages: Number of pages accessible.
+  overflow_behavior: A page beyond total_pages returns 200 with an empty data array.
+  docs: https://github.com/CopThis/partner-api/blob/master/partner_api.md#json-response-envelope
+
+data_types:
+  prices: >-
+    Marshalled as strings without a currency marker (e.g. "19.99"); floats
+    avoided for values needing precision.
+  currency: ISO 4217 code alongside price (e.g. USD).
+  dates: ISO 8601 date strings in UTC (e.g. "2016-08-01").
+  datetimes: ISO 8601 with Z suffix (e.g. "2016-08-01T12:34:56Z").
+  identifiers: >-
+    Object ids may be a number or a string; Merchbar stores them as strings for
+    flexibility.
+
+versioning:
+  scheme: uri-path
+  current: v1
+  policy: >-
+    Backwards compatibility is prioritized; breaking changes require a new
+    version in the URL path, and Merchbar must be notified of the deprecation
+    timeline for the old version.
+  reference: lifecycle/copthis-lifecycle.yml
+
+environments:
+  separation: >-
+    Partners host a staging environment in addition to production. Staging
+    services all the same requests with realistic, consistent, faked responses
+    and no real-world side effects (no actual shipping); faked-but-realistic
+    values (e.g. tracking numbers) are recommended where needed to complete a
+    response.
+
+rate_limiting:
+  documented: false
+  detail: No rate-limit signaling is documented in the contract.

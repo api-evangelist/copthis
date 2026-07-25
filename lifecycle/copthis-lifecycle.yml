@@ -1,0 +1,25 @@
+generated: '2026-07-18'
+method: searched
+source: >-
+  https://github.com/CopThis/partner-api/blob/master/partner_api.md#api-versioning
+  — the versioning and deprecation policy documented in the Merchbar Partner API
+  contract.
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://github.com/CopThis/partner-api/blob/master/partner_api.md#api-versioning
+  detail: >-
+    The version number is included in the URL path of every request. After
+    publication, backwards compatibility is prioritized so existing integrations
+    do not need to change.
+deprecation:
+  policy: >-
+    Breaking changes that cannot be made backwards-compatible require a new
+    versioned endpoint for the new functionality; when a new version is created,
+    Merchbar must be notified of the deprecation timeline for the old version.
+  policy_url: https://github.com/CopThis/partner-api/blob/master/partner_api.md#api-versioning
+  sunset_header: false
+sla:
+  documented: false
+status_page: null
+deprecated_operations: []

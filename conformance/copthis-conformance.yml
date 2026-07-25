@@ -1,0 +1,37 @@
+generated: '2026-07-18'
+method: derived
+source: >-
+  Derived from openapi/copthis-partner-api-openapi.yml and the documented
+  conventions in partner_api.md. Asserts cross-cutting standards the Merchbar
+  Partner API conforms to; absence of a standard is valid recorded data.
+standards:
+  - id: http-basic-auth
+    conforms: true
+    evidence: securityScheme type http scheme basic (RFC 7617), HTTPS required
+  - id: tls-required
+    conforms: true
+    evidence: non-TLS connections rejected; Mozilla Modern Compatibility recommended
+  - id: uri-path-versioning
+    conforms: true
+    evidence: version number included in the URL path (v1)
+  - id: offset-pagination
+    conforms: true
+    evidence: page / per_page params with current_page / per_page / total_pages response fields
+  - id: iso8601-datetimes
+    conforms: true
+    evidence: dates and datetimes marshalled as ISO 8601 UTC strings
+  - id: iso4217-currency
+    conforms: true
+    evidence: currency codes (USD) returned alongside string prices
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: 'custom error envelope ({"error": ...}), not application/problem+json'
+  - id: oauth2
+    conforms: false
+    evidence: authentication is HTTP Basic, no oauth2 securitySchemes
+  - id: idempotency-keys
+    conforms: false
+    evidence: no Idempotency-Key mechanism documented
+  - id: webhooks
+    conforms: false
+    evidence: no event/webhook surface documented (Merchbar polls partner endpoints)

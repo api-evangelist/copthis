@@ -1,7 +1,16 @@
 aid: copthis
 name: CopThis
-description: CopThis is a company surfaced as a portfolio company of 500-global and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  CopThis is the company behind Merchbar, the official online merchandise
+  retailer for musicians and artists, selling authenticated band and artist
+  merch (vinyl, apparel, accessories) across thousands of artist stores.
+  CopThis operates the Merchbar Partner API — a REST contract that merchandise
+  and fulfillment partners implement so Merchbar can list a partner's stores and
+  merchandise and place, track, update, and cancel orders on behalf of Merchbar
+  customers. The API uses HTTP Basic authentication over HTTPS, a JSON envelope
+  with a top-level data key and pagination for collections, URI-path versioning
+  (v1), and an error envelope for 4xx/5xx responses. CopThis is a portfolio
+  company of 500 Global.
 url: https://raw.githubusercontent.com/api-evangelist/copthis/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,17 +18,125 @@ x-backed-by:
 - 500-global
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
+image: https://merchbar.com/favicon.ico
 tags:
 - Company
-apis: []
+- Music
+- Merchandise
+- E-Commerce
+- Retail
+- Orders
+- Fulfillment
+- Partner API
+- Marketplace
+apis:
+- aid: copthis:copthis-orders-api
+  name: CopThis Orders API
+  description: Order previews, creation, tracking, address updates, and cancellation.
+  humanURL: https://github.com/CopThis/partner-api
+  baseURL: https://api.partner.example.com/v1
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/copthis-orders-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/CopThis/partner-api/blob/master/partner_api.md
+  - type: Authentication
+    url: authentication/copthis-authentication.yml
+  - type: ErrorCatalog
+    url: errors/copthis-problem-types.yml
+  - type: Conventions
+    url: conventions/copthis-conventions.yml
+  - type: DataModel
+    url: data-model/copthis-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/copthis-lifecycle.yml
+  - type: Deprecation
+    url: lifecycle/copthis-lifecycle.yml
+  - type: Conformance
+    url: conformance/copthis-conformance.yml
+- aid: copthis:copthis-stores-api
+  name: CopThis Stores API
+  description: Partner stores (typically one per artist) and their merchandise.
+  humanURL: https://github.com/CopThis/partner-api
+  baseURL: https://api.partner.example.com/v1
+  tags:
+  - Stores
+  properties:
+  - type: OpenAPI
+    url: openapi/copthis-stores-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/CopThis/partner-api/blob/master/partner_api.md
+  - type: Authentication
+    url: authentication/copthis-authentication.yml
+  - type: ErrorCatalog
+    url: errors/copthis-problem-types.yml
+  - type: Conventions
+    url: conventions/copthis-conventions.yml
+  - type: DataModel
+    url: data-model/copthis-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/copthis-lifecycle.yml
+  - type: Deprecation
+    url: lifecycle/copthis-lifecycle.yml
+  - type: Conformance
+    url: conformance/copthis-conformance.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/copthis-domain-security.yml
 - type: Website
   url: https://merchbar.com
+- type: Documentation
+  url: https://github.com/CopThis/partner-api/blob/master/partner_api.md
+- type: APIReference
+  url: https://github.com/CopThis/partner-api/blob/master/partner_api.md#api-endpoints
+- type: GitHubOrganization
+  url: https://github.com/CopThis
+- type: Authentication
+  url: authentication/copthis-authentication.yml
+- type: ErrorCatalog
+  url: errors/copthis-problem-types.yml
+- type: Conventions
+  url: conventions/copthis-conventions.yml
+- type: DataModel
+  url: data-model/copthis-data-model.yml
+- type: Lifecycle
+  url: lifecycle/copthis-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/copthis-lifecycle.yml
+- type: Conformance
+  url: conformance/copthis-conformance.yml
+- type: Overlay
+  url: overlays/copthis-partner-api-overlay.yaml
+- type: MCPServer
+  url: mcp/copthis-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/copthis-llms.txt
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

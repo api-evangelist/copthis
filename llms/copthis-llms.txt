@@ -1,0 +1,29 @@
+# CopThis (Merchbar)
+
+> CopThis is the company behind Merchbar, the official online merchandise retailer for musicians and artists. CopThis operates the Merchbar Partner API — a REST contract that merchandise and fulfillment partners implement so Merchbar can list a partner's stores and merchandise and place, track, update, and cancel orders on behalf of Merchbar customers. HTTP Basic auth over HTTPS, a JSON `data` envelope with pagination, and URI-path versioning (v1).
+
+## APIs
+
+- [Merchbar Partner API docs](https://github.com/CopThis/partner-api/blob/master/partner_api.md): Full contract — stores, merchandise, and order lifecycle.
+- [API reference (endpoints)](https://github.com/CopThis/partner-api/blob/master/partner_api.md#api-endpoints): The eight partner endpoints.
+
+## Specs
+
+- [OpenAPI 3.1](openapi/copthis-partner-api-openapi.yml): Merchbar Partner API, transcribed from the published contract.
+- [OpenAPI Overlay](overlays/copthis-partner-api-overlay.yaml): API Evangelist enhancements.
+
+## Artifacts
+
+- [Authentication](authentication/copthis-authentication.yml): HTTP Basic over HTTPS.
+- [Conventions](conventions/copthis-conventions.yml): Envelope, pagination, versioning, data types, staging/production.
+- [Error catalog](errors/copthis-problem-types.yml): Error envelope and documented failure conditions.
+- [Data model](data-model/copthis-data-model.yml): Store → Merch → Variant and Order → LineItem/Shipping graph.
+- [Lifecycle](lifecycle/copthis-lifecycle.yml): URI-path versioning and deprecation-notification policy.
+- [Conformance](conformance/copthis-conformance.yml): Standards asserted (HTTP Basic, TLS, ISO 8601/4217, offset pagination).
+- [MCP server (candidate)](mcp/copthis-mcp.yml): Candidate tools derived from the API operations.
+- [Agent Skills](skills/_index.yml): Sync catalog, place order, manage order.
+
+## Company
+
+- [Merchbar](https://merchbar.com): Official artist merchandise store.
+- [GitHub organization](https://github.com/CopThis): CopThis / Merchbar repositories.

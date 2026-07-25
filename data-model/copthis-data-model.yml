@@ -1,0 +1,31 @@
+generated: '2026-07-18'
+method: derived
+source: >-
+  Derived from the object shapes and id-reference fields in
+  openapi/copthis-partner-api-openapi.yml (Merchbar Partner API), which mirror
+  the documented JSON examples in partner_api.md.
+notation: >-
+  relationships use has_one / has_many / belongs_to with the reference field
+  name; direction is from the entity that owns the reference.
+docs: https://github.com/CopThis/partner-api/blob/master/partner_api.md
+
+entities:
+  - {name: Store, id_field: id, domain: catalog, description: A store, typically one per artist; carries title, description, photo, and a visible flag.}
+  - {name: Merch, id_field: id, domain: catalog, description: A merchandise item — a single design in a single color — with price, currency, quantity, status, and photos.}
+  - {name: Variant, id_field: id, domain: catalog, description: A size/fit variant of a merch item with its own quantity and price.}
+  - {name: OrderPreview, id_field: null, domain: ordering, description: A pre-order quote reiterating line items with availability and shipping options.}
+  - {name: Order, id_field: id, domain: ordering, description: A placed order with status (RECEIVED/SHIPPED/CANCELLED), address, line items, shipping, and tracking number.}
+  - {name: LineItem, id_field: id, domain: ordering, description: A merch (and optional variant) reference plus quantity and availability within an order/preview.}
+  - {name: Address, id_field: null, domain: ordering, description: A US-default shipping address.}
+  - {name: ShippingOption, id_field: id, domain: ordering, description: A carrier/service choice with ship date, time estimate, and price.}
+
+relationships:
+  - {from: Store, to: Merch, kind: has_many, via: "store id (path /stores/{id}/merch)"}
+  - {from: Merch, to: Variant, kind: has_many, via: variants}
+  - {from: Order, to: LineItem, kind: has_many, via: line_items}
+  - {from: OrderPreview, to: LineItem, kind: has_many, via: line_items}
+  - {from: OrderPreview, to: ShippingOption, kind: has_many, via: shipping_options}
+  - {from: Order, to: ShippingOption, kind: has_one, via: shipping}
+  - {from: Order, to: Address, kind: has_one, via: address}
+  - {from: LineItem, to: Merch, kind: belongs_to, via: id}
+  - {from: LineItem, to: Variant, kind: belongs_to, via: variant_id}

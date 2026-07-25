@@ -1,0 +1,21 @@
+generated: '2026-07-18'
+method: generated
+source: >-
+  Generated from openapi/copthis-partner-api-openapi.yml and the documented
+  conventions (conventions/copthis-conventions.yml, errors/copthis-problem-types.yml).
+  Every operationId referenced is verified against the OpenAPI. No provider-published
+  Agent Skills / AGENTS.md were found.
+api: openapi/copthis-partner-api-openapi.yml
+skills:
+  - file: copthis-sync-catalog.md
+    name: Sync a partner's stores and merchandise
+    api: openapi/copthis-partner-api-openapi.yml
+    operations: [listStores, getStore, listStoreMerch]
+  - file: copthis-place-order.md
+    name: Preview and place an order
+    api: openapi/copthis-partner-api-openapi.yml
+    operations: [createOrderPreview, createOrder]
+  - file: copthis-manage-order.md
+    name: Track, update, and cancel an order
+    api: openapi/copthis-partner-api-openapi.yml
+    operations: [getOrder, updateOrderAddress, cancelOrder]

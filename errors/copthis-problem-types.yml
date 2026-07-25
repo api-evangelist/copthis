@@ -1,0 +1,60 @@
+generated: '2026-07-18'
+method: derived
+source: >-
+  Derived from the documented error behavior in the Merchbar Partner API docs
+  (github.com/CopThis/partner-api/blob/master/partner_api.md) and the 4xx/5xx
+  responses in openapi/copthis-partner-api-openapi.yml.
+format: custom
+envelope:
+  description: >-
+    Errors are returned with a 4xx or 5xx HTTP status and a top-level `error`
+    key instead of `data`. The `error` value may be a simple string
+    (e.g. {"error": "Forbidden"}) or an object with details relevant to the
+    error. Any 200 response is considered successful. Specific codes and
+    messages are left to the partner implementation; consistent HTTP status
+    codes with detailed messages are recommended.
+  field: error
+  types: [string, object]
+problems:
+  - status: 401
+    title: Unauthorized
+    detail: >-
+      Missing or invalid HTTP Basic credentials, or a non-TLS connection (which
+      must be rejected immediately).
+    remediation: >-
+      Send a valid `Authorization: Basic` header over HTTPS using current
+      credentials; rotate credentials if they were invalidated.
+    source_operation: openapi/copthis-partner-api-openapi.yml
+  - status: 403
+    title: Forbidden
+    detail: 'The documented example error value ({"error": "Forbidden"}).'
+    source_operation: openapi/copthis-partner-api-openapi.yml
+  - status: 404
+    title: Not Found
+    detail: The referenced store, merch item, or order does not exist.
+    source_operation: openapi/copthis-partner-api-openapi.yml#getOrder
+  - status: 422
+    title: Item unavailable
+    detail: >-
+      An order was requested for an item that is no longer available; per the
+      contract the entire order fails.
+    remediation: Re-run createOrderPreview to see current availability before createOrder.
+    source_operation: openapi/copthis-partner-api-openapi.yml#createOrder
+  - status: 422
+    title: International shipping not supported
+    detail: >-
+      A country other than "US" was specified for a partner that does not
+      support international shipping.
+    remediation: Submit a US shipping address, or confirm international support with the partner.
+    source_operation: openapi/copthis-partner-api-openapi.yml#createOrderPreview
+  - status: 422
+    title: Address change not permitted
+    detail: >-
+      The requested shipping-address update is not allowed, or would change the
+      shipping cost.
+    remediation: Cancel and re-create the order if the address/shipping cost must change.
+    source_operation: openapi/copthis-partner-api-openapi.yml#updateOrderAddress
+  - status: 500
+    title: Server error
+    detail: An unexpected error occurred in the partner implementation.
+    source_operation: openapi/copthis-partner-api-openapi.yml

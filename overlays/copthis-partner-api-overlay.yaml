@@ -1,0 +1,31 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Merchbar Partner API
+  version: 1.0.0
+extends: openapi/copthis-partner-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: true
+      x-apievangelist-source: https://github.com/CopThis/partner-api/blob/master/partner_api.md
+      x-artifacts:
+        authentication: authentication/copthis-authentication.yml
+        conventions: conventions/copthis-conventions.yml
+        errors: errors/copthis-problem-types.yml
+        data_model: data-model/copthis-data-model.yml
+        lifecycle: lifecycle/copthis-lifecycle.yml
+        conformance: conformance/copthis-conformance.yml
+  - target: $.info
+    update:
+      x-agent-notes: >-
+        HTTP Basic auth over HTTPS. Success responses are wrapped in a `data`
+        envelope (array for collections, object for single entities); errors use
+        an `error` envelope with 4xx/5xx. Order placement is not idempotent —
+        preview then create, and do not blindly retry createOrder. Prices are
+        strings without a currency symbol; dates/datetimes are ISO 8601 UTC.
+  - target: $.tags
+    update:
+      - name: Stores
+        description: Partner stores (one per artist) and their merchandise catalog.
+      - name: Orders
+        description: Order previews, creation, tracking, address updates, and cancellation.

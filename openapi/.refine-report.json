@@ -1,0 +1,16 @@
+{
+  "provider": "copthis",
+  "sources": [
+    "copthis-orders-api-openapi.yml",
+    "copthis-stores-api-openapi.yml"
+  ],
+  "outputs": [
+    "copthis-orders-api-openapi.yml",
+    "copthis-stores-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
