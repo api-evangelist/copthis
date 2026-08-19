@@ -1,0 +1,1225 @@
+{
+  "item": [
+    {
+      "id": "8610e282-fca8-4c13-ab88-31c931f5dbfa",
+      "name": "Orders",
+      "description": {
+        "content": "Order previews, creation, tracking, address updates, and cancellation.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3451c3bf-302a-4d3f-aa8b-d4047a3311b2",
+          "name": "Preview an order",
+          "request": {
+            "name": "Preview an order",
+            "description": {
+              "content": "Returns an order preview: a reiteration of the input line items plus a total shipping cost estimate and shipping options. Unavailable items are flagged with `available: false` and excluded from the shipping estimate. Returns an error for non-US countries where international shipping is not supported.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "order_previews"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The partner's own API host that implements this contract.",
+                  "type": "any",
+                  "value": "{{partnerHost}}",
+                  "key": "partnerHost"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string,null>\"\n  },\n  \"line_items\": [\n    {\n      \"id\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"variant_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"variant_id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "95bd62dc-228a-4a95-9ede-8482022c6c6c",
+              "name": "An order preview with shipping options.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order_previews"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"line1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\",\n    \"line2\": \"string\"\n  },\n  \"line_items\": [\n    {\n      \"id\": \"string\",\n      \"quantity\": 8487,\n      \"variant_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"quantity\": 8306,\n      \"variant_id\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"address\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"line1\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"country\": \"string\",\n      \"line2\": \"string\"\n    },\n    \"line_items\": [\n      {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"quantity\": 994,\n        \"variant_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"available\": true\n      },\n      {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"quantity\": 5956,\n        \"variant_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"available\": true\n      }\n    ],\n    \"shipping_options\": [\n      {\n        \"id\": \"string\",\n        \"title\": \"string\",\n        \"price\": \"string\",\n        \"currency\": \"string\",\n        \"ship_date\": \"2015-10-04\",\n        \"ship_time\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"title\": \"string\",\n        \"price\": \"string\",\n        \"currency\": \"string\",\n        \"ship_date\": \"1995-12-24\",\n        \"ship_time\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4eef73b1-1842-4224-a335-6f1d184ab48a",
+              "name": "An error response with a 4xx or 5xx status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order_previews"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"line1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\",\n    \"line2\": \"string\"\n  },\n  \"line_items\": [\n    {\n      \"id\": \"string\",\n      \"quantity\": 8487,\n      \"variant_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"quantity\": 8306,\n      \"variant_id\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63e86038-7411-4a54-9ce0-92070f0e9a0d",
+              "name": "An error response with a 4xx or 5xx status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order_previews"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"line1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\",\n    \"line2\": \"string\"\n  },\n  \"line_items\": [\n    {\n      \"id\": \"string\",\n      \"quantity\": 8487,\n      \"variant_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"quantity\": 8306,\n      \"variant_id\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2309741-11ed-4c10-95a4-e10a6fedeb9a",
+          "name": "Create an order",
+          "request": {
+            "name": "Create an order",
+            "description": {
+              "content": "Creates a new order. If any requested item is no longer available the entire order fails. Requires a `selected_shipping_option_id` from a prior preview.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The partner's own API host that implements this contract.",
+                  "type": "any",
+                  "value": "{{partnerHost}}",
+                  "key": "partnerHost"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string,null>\"\n  },\n  \"line_items\": [\n    {\n      \"id\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"variant_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"variant_id\": \"<string>\"\n    }\n  ],\n  \"selected_shipping_option_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "23d7df02-d3e9-4df9-a790-7cf0027548cb",
+              "name": "The created order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"line1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\",\n    \"line2\": \"string\"\n  },\n  \"line_items\": [\n    {\n      \"id\": \"string\",\n      \"quantity\": 8494,\n      \"variant_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"quantity\": 2862,\n      \"variant_id\": \"string\"\n    }\n  ],\n  \"selected_shipping_option_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"status\": \"RECEIVED\",\n    \"created\": \"1979-04-09T04:56:26.547Z\",\n    \"tracking_number\": \"string\",\n    \"ship_date\": \"2025-06-07\",\n    \"address\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"line1\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"country\": \"string\",\n      \"line2\": \"string\"\n    },\n    \"line_items\": [\n      {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"quantity\": 3487,\n        \"variant_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"available\": false\n      },\n      {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"quantity\": 8966,\n        \"variant_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"available\": true\n      }\n    ],\n    \"shipping\": {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"price\": \"string\",\n      \"currency\": \"string\",\n      \"ship_date\": \"2001-07-31\",\n      \"ship_time\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e69ddac3-bffa-4f2c-a428-39c40b950f8c",
+              "name": "An error response with a 4xx or 5xx status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"line1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\",\n    \"line2\": \"string\"\n  },\n  \"line_items\": [\n    {\n      \"id\": \"string\",\n      \"quantity\": 8494,\n      \"variant_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"quantity\": 2862,\n      \"variant_id\": \"string\"\n    }\n  ],\n  \"selected_shipping_option_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e939d341-ddb1-48db-9544-b924b5eaf3fd",
+              "name": "An error response with a 4xx or 5xx status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"line1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\",\n    \"line2\": \"string\"\n  },\n  \"line_items\": [\n    {\n      \"id\": \"string\",\n      \"quantity\": 8494,\n      \"variant_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"quantity\": 2862,\n      \"variant_id\": \"string\"\n    }\n  ],\n  \"selected_shipping_option_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6df0093f-052b-4eb5-8128-c295e3206654",
+          "name": "Get order status",
+          "request": {
+            "name": "Get order status",
+            "description": {
+              "content": "Returns the current status of an order, including tracking number once shipped.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) Order identifier."
+                },
+                {
+                  "description": "The partner's own API host that implements this contract.",
+                  "type": "any",
+                  "value": "{{partnerHost}}",
+                  "key": "partnerHost"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a7825246-d0fb-476e-9257-dae490308dbd",
+              "name": "The order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order identifier."
+                    },
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"status\": \"RECEIVED\",\n    \"created\": \"1979-04-09T04:56:26.547Z\",\n    \"tracking_number\": \"string\",\n    \"ship_date\": \"2025-06-07\",\n    \"address\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"line1\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"country\": \"string\",\n      \"line2\": \"string\"\n    },\n    \"line_items\": [\n      {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"quantity\": 3487,\n        \"variant_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"available\": false\n      },\n      {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"quantity\": 8966,\n        \"variant_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"available\": true\n      }\n    ],\n    \"shipping\": {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"price\": \"string\",\n      \"currency\": \"string\",\n      \"ship_date\": \"2001-07-31\",\n      \"ship_time\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fa0b962-5b65-4e17-b1a9-b5a2ccee3513",
+              "name": "An error response with a 4xx or 5xx status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order identifier."
+                    },
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ca8ff09-d968-4227-8111-9a8474a27dee",
+              "name": "An error response with a 4xx or 5xx status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order identifier."
+                    },
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1bbca30a-033d-4345-ad78-782c156391ba",
+          "name": "Update order shipping address",
+          "request": {
+            "name": "Update order shipping address",
+            "description": {
+              "content": "Updates the shipping address for an order. Merchbar sends only the `address` field. Returns an error if changing the address is not allowed or would change the shipping cost.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) Order identifier."
+                },
+                {
+                  "description": "The partner's own API host that implements this contract.",
+                  "type": "any",
+                  "value": "{{partnerHost}}",
+                  "key": "partnerHost"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string,null>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "103adea6-2979-4143-ab6d-3163ebc120c1",
+              "name": "The updated order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order identifier."
+                    },
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"line1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\",\n    \"line2\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"status\": \"RECEIVED\",\n    \"created\": \"1979-04-09T04:56:26.547Z\",\n    \"tracking_number\": \"string\",\n    \"ship_date\": \"2025-06-07\",\n    \"address\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"line1\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"country\": \"string\",\n      \"line2\": \"string\"\n    },\n    \"line_items\": [\n      {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"quantity\": 3487,\n        \"variant_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"available\": false\n      },\n      {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"quantity\": 8966,\n        \"variant_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"available\": true\n      }\n    ],\n    \"shipping\": {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"price\": \"string\",\n      \"currency\": \"string\",\n      \"ship_date\": \"2001-07-31\",\n      \"ship_time\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56aa53c9-4306-4a24-b684-5a5bb9b92e53",
+              "name": "An error response with a 4xx or 5xx status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order identifier."
+                    },
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"line1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\",\n    \"line2\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6a51635-8f6e-44f8-867a-371edc0712e9",
+              "name": "An error response with a 4xx or 5xx status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order identifier."
+                    },
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"line1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\",\n    \"line2\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b4948d1-00cb-4de3-b171-5c919379bcc1",
+          "name": "Cancel an order",
+          "request": {
+            "name": "Cancel an order",
+            "description": {
+              "content": "Cancels an order. The response body is ignored by Merchbar as long as it is not an error; by REST convention the (now CANCELLED) order object is returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":order_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) Order identifier."
+                },
+                {
+                  "description": "The partner's own API host that implements this contract.",
+                  "type": "any",
+                  "value": "{{partnerHost}}",
+                  "key": "partnerHost"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "963f02ee-0712-4b6c-94c5-657a9cb85902",
+              "name": "The cancelled order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order identifier."
+                    },
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"status\": \"RECEIVED\",\n    \"created\": \"1979-04-09T04:56:26.547Z\",\n    \"tracking_number\": \"string\",\n    \"ship_date\": \"2025-06-07\",\n    \"address\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"line1\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"country\": \"string\",\n      \"line2\": \"string\"\n    },\n    \"line_items\": [\n      {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"quantity\": 3487,\n        \"variant_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"available\": false\n      },\n      {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"quantity\": 8966,\n        \"variant_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"available\": true\n      }\n    ],\n    \"shipping\": {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"price\": \"string\",\n      \"currency\": \"string\",\n      \"ship_date\": \"2001-07-31\",\n      \"ship_time\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8f7fdd4-cfdd-49e2-ad2d-ffade75bb327",
+              "name": "An error response with a 4xx or 5xx status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order identifier."
+                    },
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d71f5928-e2cb-4079-a183-23ec11c6faf8",
+              "name": "An error response with a 4xx or 5xx status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order identifier."
+                    },
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The partner's own API host that implements this contract.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "api.partner.example.com",
+      "key": "partnerHost"
+    },
+    {
+      "type": "string",
+      "value": "https://{{partnerHost}}/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a07fc7e2-1a54-464c-a21e-2257e88ad196",
+    "name": "Merchbar Partner Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Merchbar Partner API is the REST contract a merchandise partner implements so that Merchbar (operated by CopThis) can list a partner's stores and merchandise and place, track, update, and cancel orders on behalf of Merchbar customers. Partners host both a staging and a production implementation of this contract. Authentication is HTTP Basic over HTTPS; responses use a JSON envelope with a top-level `data` key (and `pagination` for collections), and errors return an `error` key with a 4xx/5xx status.\n\nContact Support:\n Name: Merchbar (CopThis)",
+      "type": "text/plain"
+    }
+  }
+}

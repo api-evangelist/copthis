@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Merchbar Partner Orders Stores API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List stores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partnerHost}/v1/stores",
+            "params": [
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Current page number (1-indexed)."
+              }
+            ]
+          },
+          "docs": "Returns a list of stores. Typically one store is assigned per artist. Stores can be hidden from Merchbar users with `visible: false`. Paginated unless the number of stores is small."
+        },
+        {
+          "info": {
+            "name": "Get store metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partnerHost}/v1/stores/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Store identifier (string or integer)."
+              }
+            ]
+          },
+          "docs": "Returns extended store metadata. Merchbar polls this endpoint for every store at least once a day to keep store status up to date."
+        },
+        {
+          "info": {
+            "name": "List store merchandise",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partnerHost}/v1/stores/:id/merch",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Store identifier."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Current page number (1-indexed)."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of merchandise within a specific store. Merchbar polls this endpoint for every store at least once a day to keep item quantities up to date. Each merch item is a single design in a single color; sizes/fits are expressed as `variants`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,778 @@
+{
+  "item": [
+    {
+      "id": "d0e71b43-7fc9-41dd-9907-a97a6066f16d",
+      "name": "Stores",
+      "description": {
+        "content": "Partner stores (typically one per artist) and their merchandise.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6d0f157a-8746-4646-b06c-35f1d387abc9",
+          "name": "List stores",
+          "request": {
+            "name": "List stores",
+            "description": {
+              "content": "Returns a list of stores. Typically one store is assigned per artist. Stores can be hidden from Merchbar users with `visible: false`. Paginated unless the number of stores is small.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stores"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "Number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Current page number (1-indexed)."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The partner's own API host that implements this contract.",
+                  "type": "any",
+                  "value": "{{partnerHost}}",
+                  "key": "partnerHost"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ff344bc0-7d14-4d14-8a4c-792a2e9143b2",
+              "name": "A paginated list of stores.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"title\": \"Artist Name\",\n      \"visible\": true\n    },\n    {\n      \"id\": 2,\n      \"title\": \"Another Artist\",\n      \"visible\": false\n    }\n  ],\n  \"pagination\": {\n    \"current_page\": 1,\n    \"per_page\": 10,\n    \"total_pages\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "618ec133-d56c-4745-949b-92a121a9e14a",
+              "name": "An error response with a 4xx or 5xx status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d3ccde2-fd1b-42f5-983e-e35397d90b23",
+              "name": "An error response with a 4xx or 5xx status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b08b12a5-418c-443a-917c-c68e48875386",
+          "name": "Get store metadata",
+          "request": {
+            "name": "Get store metadata",
+            "description": {
+              "content": "Returns extended store metadata. Merchbar polls this endpoint for every store at least once a day to keep store status up to date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stores",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Store identifier (string or integer)."
+                },
+                {
+                  "description": "The partner's own API host that implements this contract.",
+                  "type": "any",
+                  "value": "{{partnerHost}}",
+                  "key": "partnerHost"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ae0aedc-dd8f-4814-b053-5ed10e2f8193",
+              "name": "Store metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stores",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Store identifier (string or integer)."
+                    },
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 1,\n    \"title\": \"Artist Name\",\n    \"description\": \"The official store of Artist Name!\",\n    \"photo\": \"https://dt72k0ec4onep.cloudfront.net/JSNEMSDE92381733.JPG\",\n    \"visible\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9aebd97-9246-4965-b107-a737a26bf03c",
+              "name": "An error response with a 4xx or 5xx status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stores",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Store identifier (string or integer)."
+                    },
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43383e15-5db0-4d9e-96a1-db8c118b9189",
+              "name": "An error response with a 4xx or 5xx status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stores",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Store identifier (string or integer)."
+                    },
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85daccbd-a342-4661-8b7c-fbd79edee2ee",
+          "name": "List store merchandise",
+          "request": {
+            "name": "List store merchandise",
+            "description": {
+              "content": "Returns a paginated list of merchandise within a specific store. Merchbar polls this endpoint for every store at least once a day to keep item quantities up to date. Each merch item is a single design in a single color; sizes/fits are expressed as `variants`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stores",
+                ":id",
+                "merch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "Number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Current page number (1-indexed)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Store identifier."
+                },
+                {
+                  "description": "The partner's own API host that implements this contract.",
+                  "type": "any",
+                  "value": "{{partnerHost}}",
+                  "key": "partnerHost"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e016442-b560-43d1-89ae-635a1b17a50f",
+              "name": "A paginated list of merchandise.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stores",
+                    ":id",
+                    "merch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Store identifier."
+                    },
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"price\": \"string\",\n      \"currency\": \"string\",\n      \"quantity\": 5629,\n      \"visible\": true,\n      \"status\": \"available\",\n      \"description\": \"string\",\n      \"color\": \"string\",\n      \"sale_price\": \"string\",\n      \"available_date\": \"2008-03-01\",\n      \"photos\": [\n        \"https://W.rnvzp1z-Ed9U\",\n        \"http://jYquwCGGjhPTjhyfVii.myy\"\n      ],\n      \"variants\": [\n        {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"quantity\": 9782,\n          \"price\": \"string\",\n          \"currency\": \"string\",\n          \"sale_price\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"quantity\": 5221,\n          \"price\": \"string\",\n          \"currency\": \"string\",\n          \"sale_price\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"price\": \"string\",\n      \"currency\": \"string\",\n      \"quantity\": 7605,\n      \"visible\": true,\n      \"status\": \"preorder\",\n      \"description\": \"string\",\n      \"color\": \"string\",\n      \"sale_price\": \"string\",\n      \"available_date\": \"1989-09-18\",\n      \"photos\": [\n        \"https://TBUZVFnCVkjQzclo.eijcvhOCHME07,fNT\",\n        \"http://PzXbPeaNFDkuLrDH.rmvG5NtCeQ2RH,PKJrfXoBLXNwKsH\"\n      ],\n      \"variants\": [\n        {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"quantity\": 7654,\n          \"price\": \"string\",\n          \"currency\": \"string\",\n          \"sale_price\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"quantity\": 8651,\n          \"price\": \"string\",\n          \"currency\": \"string\",\n          \"sale_price\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"pagination\": {\n    \"current_page\": 5580,\n    \"per_page\": 1181,\n    \"total_pages\": 9761\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1de03733-b564-4821-a3f8-817807b83b07",
+              "name": "An error response with a 4xx or 5xx status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stores",
+                    ":id",
+                    "merch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Store identifier."
+                    },
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb84b81a-f6be-493a-9957-4ec4373624e0",
+              "name": "An error response with a 4xx or 5xx status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stores",
+                    ":id",
+                    "merch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Store identifier."
+                    },
+                    {
+                      "description": "The partner's own API host that implements this contract.",
+                      "type": "any",
+                      "value": "{{partnerHost}}",
+                      "key": "partnerHost"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The partner's own API host that implements this contract.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "api.partner.example.com",
+      "key": "partnerHost"
+    },
+    {
+      "type": "string",
+      "value": "https://{{partnerHost}}/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "12e3abfa-e284-4122-a5b2-ab585f4d05a6",
+    "name": "Merchbar Partner Orders Stores API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Merchbar Partner API is the REST contract a merchandise partner implements so that Merchbar (operated by CopThis) can list a partner's stores and merchandise and place, track, update, and cancel orders on behalf of Merchbar customers. Partners host both a staging and a production implementation of this contract. Authentication is HTTP Basic over HTTPS; responses use a JSON envelope with a top-level `data` key (and `pagination` for collections), and errors return an `error` key with a 4xx/5xx status.\n\nContact Support:\n Name: Merchbar (CopThis)",
+      "type": "text/plain"
+    }
+  }
+}

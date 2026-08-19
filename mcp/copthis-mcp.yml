@@ -1,35 +1,39 @@
 generated: '2026-07-18'
 method: derived
 status: candidate
-source: >-
-  Derived one candidate tool per operation from
-  openapi/copthis-partner-api-openapi.yml. No official Merchbar/CopThis MCP
-  server was found (searched docs, npm @modelcontextprotocol, MCP registries).
+source: Derived one candidate tool per operation from openapi/copthis-partner-api-openapi.yml. No official
+  Merchbar/CopThis MCP server was found (searched docs, npm @modelcontextprotocol, MCP registries).
 server:
   name: copthis-merchbar-partner
   transport: http
 tools:
-  - name: list_stores
-    description: List partner stores (typically one per artist), paginated.
-    source_operation: openapi/copthis-partner-api-openapi.yml#listStores
-  - name: get_store
-    description: Get extended metadata for a single store.
-    source_operation: openapi/copthis-partner-api-openapi.yml#getStore
-  - name: list_store_merch
-    description: List merchandise (with variants) within a store, paginated.
-    source_operation: openapi/copthis-partner-api-openapi.yml#listStoreMerch
-  - name: create_order_preview
-    description: Preview an order with availability checks and shipping options.
-    source_operation: openapi/copthis-partner-api-openapi.yml#createOrderPreview
-  - name: create_order
-    description: Create an order from line items and a selected shipping option.
-    source_operation: openapi/copthis-partner-api-openapi.yml#createOrder
-  - name: get_order
-    description: Get the status and tracking of an order.
-    source_operation: openapi/copthis-partner-api-openapi.yml#getOrder
-  - name: update_order_address
-    description: Update the shipping address of an order.
-    source_operation: openapi/copthis-partner-api-openapi.yml#updateOrderAddress
-  - name: cancel_order
-    description: Cancel an order.
-    source_operation: openapi/copthis-partner-api-openapi.yml#cancelOrder
+- name: list_stores
+  description: List partner stores (typically one per artist), paginated.
+  source_operation: openapi/copthis-partner-api-openapi.yml#listStores
+- name: get_store
+  description: Get extended metadata for a single store.
+  source_operation: openapi/copthis-partner-api-openapi.yml#getStore
+- name: list_store_merch
+  description: List merchandise (with variants) within a store, paginated.
+  source_operation: openapi/copthis-partner-api-openapi.yml#listStoreMerch
+- name: create_order_preview
+  description: Preview an order with availability checks and shipping options.
+  source_operation: openapi/copthis-partner-api-openapi.yml#createOrderPreview
+- name: create_order
+  description: Create an order from line items and a selected shipping option.
+  source_operation: openapi/copthis-partner-api-openapi.yml#createOrder
+- name: get_order
+  description: Get the status and tracking of an order.
+  source_operation: openapi/copthis-partner-api-openapi.yml#getOrder
+- name: update_order_address
+  description: Update the shipping address of an order.
+  source_operation: openapi/copthis-partner-api-openapi.yml#updateOrderAddress
+- name: cancel_order
+  description: Cancel an order.
+  source_operation: openapi/copthis-partner-api-openapi.yml#cancelOrder
+deployment:
+  mode: none
+  verified: derived
+  tools: 8
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Merchbar Partner Orders API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Preview an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{partnerHost}/v1/order_previews",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns an order preview: a reiteration of the input line items plus a total shipping cost estimate and shipping options. Unavailable items are flagged with `available: false` and excluded from the shipping estimate. Returns an error for non-US countries where international shipping is not supported."
+        },
+        {
+          "info": {
+            "name": "Create an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{partnerHost}/v1/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new order. If any requested item is no longer available the entire order fails. Requires a `selected_shipping_option_id` from a prior preview."
+        },
+        {
+          "info": {
+            "name": "Get order status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partnerHost}/v1/orders/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order identifier."
+              }
+            ]
+          },
+          "docs": "Returns the current status of an order, including tracking number once shipped."
+        },
+        {
+          "info": {
+            "name": "Update order shipping address",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{partnerHost}/v1/orders/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the shipping address for an order. Merchbar sends only the `address` field. Returns an error if changing the address is not allowed or would change the shipping cost."
+        },
+        {
+          "info": {
+            "name": "Cancel an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{partnerHost}/v1/orders/:order_id/cancel",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order identifier."
+              }
+            ]
+          },
+          "docs": "Cancels an order. The response body is ignored by Merchbar as long as it is not an error; by REST convention the (now CANCELLED) order object is returned."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
