@@ -40,6 +40,16 @@ tags:
 - Merchandise
 - E-Commerce
 - Retail
+- Order
+- Fulfillment
+- Partner API
+- Marketplace
+tags_raw:
+- Company
+- Music
+- Merchandise
+- E-Commerce
+- Retail
 - Orders
 - Fulfillment
 - Partner API
@@ -51,6 +61,8 @@ apis:
   humanURL: https://github.com/CopThis/partner-api
   baseURL: https://api.partner.example.com/v1
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
