@@ -1,0 +1,25 @@
+slug: copthis
+provider: CopThis
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Transportation & Logistics
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Orders
+  spec_file: copthis-orders-api-openapi.yml
+  capability_id: BC-520.40
+  capability_id_l1: BC-520
+  capability_name: Order Fulfilment Management
+  confidence: 0.7
+  evidence: POST /orders createOrder; GET /orders/{order_id} Get order status; PATCH /orders/{order_id}
+    Update order shipping address; POST /orders/{order_id}/cancel
+  reason: Partner-implemented order placement, status tracking, address amendment and cancellation for
+    merchandise fulfilment — order fulfilment orchestration.
