@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Merchbar Partner Orders API
   version: '1.0'
-  description: The Merchbar Partner API is the REST contract a merchandise partner implements so that Merchbar (operated by CopThis) can list a partner's stores and merchandise and place, track, update, and cancel orders on behalf of Merchbar customers. Partners host both a staging and a production implementation of this contract. Authentication is HTTP Basic over HTTPS; responses use a JSON envelope with a top-level `data` key (and `pagination` for collections), and errors return an `error` key with a 4xx/5xx status.
+  description: The Merchbar Partner API is the REST contract a merchandise partner implements so that Merchbar (operated by CopThis) can list a partner's stores and merchandise and place, track, update, and cancel orders on behalf of Merchbar customers.
   contact:
     name: Merchbar (CopThis)
     url: https://github.com/CopThis/partner-api
@@ -174,86 +174,6 @@ paths:
           $ref: '#/components/responses/Error'
 components:
   schemas:
-    OrderInput:
-      type: object
-      required:
-      - address
-      - line_items
-      properties:
-        address:
-          $ref: '#/components/schemas/Address'
-        line_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/LineItemInput'
-    LineItem:
-      allOf:
-      - $ref: '#/components/schemas/LineItemInput'
-      - type: object
-        properties:
-          available:
-            type: boolean
-    Error:
-      type: object
-      required:
-      - error
-      description: Error envelope. `error` may be a simple string or an object with details.
-      properties:
-        error:
-          oneOf:
-          - type: string
-          - type: object
-    OrderPreview:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/Address'
-        line_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/LineItem'
-        shipping_options:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShippingOption'
-    Identifier:
-      description: Object identifier; may be a string or integer (stored as string by Merchbar).
-      oneOf:
-      - type: string
-      - type: integer
-    Order:
-      type: object
-      required:
-      - id
-      - status
-      properties:
-        id:
-          $ref: '#/components/schemas/Identifier'
-        created:
-          type: string
-          format: date-time
-        status:
-          type: string
-          enum:
-          - RECEIVED
-          - SHIPPED
-          - CANCELLED
-        tracking_number:
-          type:
-          - string
-          - 'null'
-          description: Provided only when status is SHIPPED.
-        ship_date:
-          type: string
-          format: date
-        address:
-          $ref: '#/components/schemas/Address'
-        line_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/LineItem'
-        shipping:
-          $ref: '#/components/schemas/ShippingOption'
     LineItemInput:
       type: object
       required:
@@ -266,6 +186,13 @@ components:
           $ref: '#/components/schemas/Identifier'
         quantity:
           type: integer
+    LineItem:
+      allOf:
+      - $ref: '#/components/schemas/LineItemInput'
+      - type: object
+        properties:
+          available:
+            type: boolean
     ShippingOption:
       type: object
       required:
@@ -319,6 +246,79 @@ components:
         country:
           type: string
           description: ISO 3166-1 alpha-2 country code; defaults to US.
+    Error:
+      type: object
+      required:
+      - error
+      description: Error envelope. `error` may be a simple string or an object with details.
+      properties:
+        error:
+          oneOf:
+          - type: string
+          - type: object
+    Order:
+      type: object
+      required:
+      - id
+      - status
+      properties:
+        id:
+          $ref: '#/components/schemas/Identifier'
+        created:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+          - RECEIVED
+          - SHIPPED
+          - CANCELLED
+        tracking_number:
+          type:
+          - string
+          - 'null'
+          description: Provided only when status is SHIPPED.
+        ship_date:
+          type: string
+          format: date
+        address:
+          $ref: '#/components/schemas/Address'
+        line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+        shipping:
+          $ref: '#/components/schemas/ShippingOption'
+    OrderInput:
+      type: object
+      required:
+      - address
+      - line_items
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItemInput'
+    OrderPreview:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+        shipping_options:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShippingOption'
+    Identifier:
+      description: Object identifier; may be a string or integer (stored as string by Merchbar).
+      oneOf:
+      - type: string
+      - type: integer
   responses:
     Error:
       description: An error response with a 4xx or 5xx status.

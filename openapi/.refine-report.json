@@ -1,8 +1,7 @@
 {
   "provider": "copthis",
   "sources": [
-    "copthis-orders-api-openapi.yml",
-    "copthis-stores-api-openapi.yml"
+    "_original/copthis-partner-api-openapi.yml"
   ],
   "outputs": [
     "copthis-orders-api-openapi.yml",
@@ -11,6 +10,13 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "copthis-partner-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "copthis-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "copthis-stores-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
