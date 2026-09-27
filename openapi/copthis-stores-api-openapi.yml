@@ -137,6 +137,22 @@ paths:
         5XX:
           $ref: '#/components/responses/Error'
 components:
+  responses:
+    Error:
+      description: An error response with a 4xx or 5xx status.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            simple:
+              value:
+                error: Forbidden
+            detailed:
+              value:
+                error:
+                  code: item_unavailable
+                  message: SKU123 is no longer available
   schemas:
     Variant:
       type: object
@@ -166,30 +182,11 @@ components:
           - string
           - 'null'
           description: Current sale price if the item is on sale, else null.
-    Pagination:
-      type: object
-      properties:
-        current_page:
-          type: integer
-          description: The current page (1-indexed).
-        per_page:
-          type: integer
-          description: Page size.
-        total_pages:
-          type: integer
-          description: Number of pages accessible.
-    Store:
-      allOf:
-      - $ref: '#/components/schemas/StoreSummary'
-      - type: object
-        properties:
-          description:
-            type: string
-            description: Store description (basic HTML supported).
-          photo:
-            type: string
-            format: uri
-            description: Store image URL.
+    Identifier:
+      description: Object identifier; may be a string or integer (stored as string by Merchbar).
+      oneOf:
+      - type: string
+      - type: integer
     StoreSummary:
       type: object
       required:
@@ -205,6 +202,28 @@ components:
           type: boolean
           description: If false
           the store's merchandise is hidden from Merchbar users.: null
+    Pagination:
+      type: object
+      properties:
+        current_page:
+          type: integer
+          description: The current page (1-indexed).
+        per_page:
+          type: integer
+          description: Page size.
+        total_pages:
+          type: integer
+          description: Number of pages accessible.
+    Error:
+      type: object
+      required:
+      - error
+      description: Error envelope. `error` may be a simple string or an object with details.
+      properties:
+        error:
+          oneOf:
+          - type: string
+          - type: object
     Merch:
       type: object
       required:
@@ -261,29 +280,19 @@ components:
           description: Size/fit variants; omitted entirely when the item has no variants.
           items:
             $ref: '#/components/schemas/Variant'
-    Error:
-      type: object
-      required:
-      - error
-      description: Error envelope. `error` may be a simple string or an object with details.
-      properties:
-        error:
-          oneOf:
-          - type: string
-          - type: object
-    Identifier:
-      description: Object identifier; may be a string or integer (stored as string by Merchbar).
-      oneOf:
-      - type: string
-      - type: integer
+    Store:
+      allOf:
+      - $ref: '#/components/schemas/StoreSummary'
+      - type: object
+        properties:
+          description:
+            type: string
+            description: Store description (basic HTML supported).
+          photo:
+            type: string
+            format: uri
+            description: Store image URL.
   parameters:
-    Page:
-      name: page
-      in: query
-      required: false
-      description: Current page number (1-indexed).
-      schema:
-        type: integer
     PerPage:
       name: per_page
       in: query
@@ -291,22 +300,13 @@ components:
       description: Number of items per page.
       schema:
         type: integer
-  responses:
-    Error:
-      description: An error response with a 4xx or 5xx status.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            simple:
-              value:
-                error: Forbidden
-            detailed:
-              value:
-                error:
-                  code: item_unavailable
-                  message: SKU123 is no longer available
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Current page number (1-indexed).
+      schema:
+        type: integer
   securitySchemes:
     basicAuth:
       type: http
