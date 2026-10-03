@@ -173,56 +173,65 @@ paths:
         5XX:
           $ref: '#/components/responses/Error'
 components:
-  responses:
-    Error:
-      description: An error response with a 4xx or 5xx status.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            simple:
-              value:
-                error: Forbidden
-            detailed:
-              value:
-                error:
-                  code: item_unavailable
-                  message: SKU123 is no longer available
   schemas:
-    Order:
+    ShippingOption:
       type: object
       required:
       - id
-      - status
+      - title
+      - price
+      - currency
       properties:
         id:
-          $ref: '#/components/schemas/Identifier'
-        created:
           type: string
-          format: date-time
-        status:
+        title:
           type: string
-          enum:
-          - RECEIVED
-          - SHIPPED
-          - CANCELLED
-        tracking_number:
-          type:
-          - string
-          - 'null'
-          description: Provided only when status is SHIPPED.
         ship_date:
           type: string
           format: date
+        ship_time:
+          type: string
+          description: Human-readable delivery estimate
+          e.g. "2-3 business days".: null
+        price:
+          type: string
+        currency:
+          type: string
+    LineItemInput:
+      type: object
+      required:
+      - id
+      - quantity
+      properties:
+        id:
+          $ref: '#/components/schemas/Identifier'
+        variant_id:
+          $ref: '#/components/schemas/Identifier'
+        quantity:
+          type: integer
+    OrderPreview:
+      type: object
+      properties:
         address:
           $ref: '#/components/schemas/Address'
         line_items:
           type: array
           items:
             $ref: '#/components/schemas/LineItem'
-        shipping:
-          $ref: '#/components/schemas/ShippingOption'
+        shipping_options:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShippingOption'
+    Error:
+      type: object
+      required:
+      - error
+      description: Error envelope. `error` may be a simple string or an object with details.
+      properties:
+        error:
+          oneOf:
+          - type: string
+          - type: object
     Address:
       type: object
       required:
@@ -258,6 +267,46 @@ components:
       oneOf:
       - type: string
       - type: integer
+    LineItem:
+      allOf:
+      - $ref: '#/components/schemas/LineItemInput'
+      - type: object
+        properties:
+          available:
+            type: boolean
+    Order:
+      type: object
+      required:
+      - id
+      - status
+      properties:
+        id:
+          $ref: '#/components/schemas/Identifier'
+        created:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+          - RECEIVED
+          - SHIPPED
+          - CANCELLED
+        tracking_number:
+          type:
+          - string
+          - 'null'
+          description: Provided only when status is SHIPPED.
+        ship_date:
+          type: string
+          format: date
+        address:
+          $ref: '#/components/schemas/Address'
+        line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+        shipping:
+          $ref: '#/components/schemas/ShippingOption'
     OrderInput:
       type: object
       required:
@@ -270,71 +319,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LineItemInput'
-    LineItem:
-      allOf:
-      - $ref: '#/components/schemas/LineItemInput'
-      - type: object
-        properties:
-          available:
-            type: boolean
-    Error:
-      type: object
-      required:
-      - error
-      description: Error envelope. `error` may be a simple string or an object with details.
-      properties:
-        error:
-          oneOf:
-          - type: string
-          - type: object
-    LineItemInput:
-      type: object
-      required:
-      - id
-      - quantity
-      properties:
-        id:
-          $ref: '#/components/schemas/Identifier'
-        variant_id:
-          $ref: '#/components/schemas/Identifier'
-        quantity:
-          type: integer
-    OrderPreview:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/Address'
-        line_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/LineItem'
-        shipping_options:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShippingOption'
-    ShippingOption:
-      type: object
-      required:
-      - id
-      - title
-      - price
-      - currency
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        ship_date:
-          type: string
-          format: date
-        ship_time:
-          type: string
-          description: Human-readable delivery estimate
-          e.g. "2-3 business days".: null
-        price:
-          type: string
-        currency:
-          type: string
   parameters:
     OrderId:
       name: order_id
@@ -343,6 +327,22 @@ components:
       description: Order identifier.
       schema:
         $ref: '#/components/schemas/Identifier'
+  responses:
+    Error:
+      description: An error response with a 4xx or 5xx status.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            simple:
+              value:
+                error: Forbidden
+            detailed:
+              value:
+                error:
+                  code: item_unavailable
+                  message: SKU123 is no longer available
   securitySchemes:
     basicAuth:
       type: http

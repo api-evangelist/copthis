@@ -137,71 +137,19 @@ paths:
         5XX:
           $ref: '#/components/responses/Error'
 components:
-  responses:
-    Error:
-      description: An error response with a 4xx or 5xx status.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            simple:
-              value:
-                error: Forbidden
-            detailed:
-              value:
-                error:
-                  code: item_unavailable
-                  message: SKU123 is no longer available
   schemas:
-    Variant:
-      type: object
-      required:
-      - id
-      - title
-      - quantity
-      - price
-      - currency
-      properties:
-        id:
-          $ref: '#/components/schemas/Identifier'
-        title:
-          type: string
-        quantity:
-          type: integer
-        price:
-          type: string
-          description: Price as a string without a currency marker
-          e.g. "15.99".: null
-        currency:
-          type: string
-          description: ISO 4217 currency code
-          e.g. USD.: null
-        sale_price:
-          type:
-          - string
-          - 'null'
-          description: Current sale price if the item is on sale, else null.
-    Identifier:
-      description: Object identifier; may be a string or integer (stored as string by Merchbar).
-      oneOf:
-      - type: string
-      - type: integer
-    StoreSummary:
-      type: object
-      required:
-      - id
-      - title
-      - visible
-      properties:
-        id:
-          $ref: '#/components/schemas/Identifier'
-        title:
-          type: string
-        visible:
-          type: boolean
-          description: If false
-          the store's merchandise is hidden from Merchbar users.: null
+    Store:
+      allOf:
+      - $ref: '#/components/schemas/StoreSummary'
+      - type: object
+        properties:
+          description:
+            type: string
+            description: Store description (basic HTML supported).
+          photo:
+            type: string
+            format: uri
+            description: Store image URL.
     Pagination:
       type: object
       properties:
@@ -214,16 +162,6 @@ components:
         total_pages:
           type: integer
           description: Number of pages accessible.
-    Error:
-      type: object
-      required:
-      - error
-      description: Error envelope. `error` may be a simple string or an object with details.
-      properties:
-        error:
-          oneOf:
-          - type: string
-          - type: object
     Merch:
       type: object
       required:
@@ -280,26 +218,65 @@ components:
           description: Size/fit variants; omitted entirely when the item has no variants.
           items:
             $ref: '#/components/schemas/Variant'
-    Store:
-      allOf:
-      - $ref: '#/components/schemas/StoreSummary'
-      - type: object
-        properties:
-          description:
-            type: string
-            description: Store description (basic HTML supported).
-          photo:
-            type: string
-            format: uri
-            description: Store image URL.
+    Error:
+      type: object
+      required:
+      - error
+      description: Error envelope. `error` may be a simple string or an object with details.
+      properties:
+        error:
+          oneOf:
+          - type: string
+          - type: object
+    Variant:
+      type: object
+      required:
+      - id
+      - title
+      - quantity
+      - price
+      - currency
+      properties:
+        id:
+          $ref: '#/components/schemas/Identifier'
+        title:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: string
+          description: Price as a string without a currency marker
+          e.g. "15.99".: null
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          e.g. USD.: null
+        sale_price:
+          type:
+          - string
+          - 'null'
+          description: Current sale price if the item is on sale, else null.
+    Identifier:
+      description: Object identifier; may be a string or integer (stored as string by Merchbar).
+      oneOf:
+      - type: string
+      - type: integer
+    StoreSummary:
+      type: object
+      required:
+      - id
+      - title
+      - visible
+      properties:
+        id:
+          $ref: '#/components/schemas/Identifier'
+        title:
+          type: string
+        visible:
+          type: boolean
+          description: If false
+          the store's merchandise is hidden from Merchbar users.: null
   parameters:
-    PerPage:
-      name: per_page
-      in: query
-      required: false
-      description: Number of items per page.
-      schema:
-        type: integer
     Page:
       name: page
       in: query
@@ -307,6 +284,29 @@ components:
       description: Current page number (1-indexed).
       schema:
         type: integer
+    PerPage:
+      name: per_page
+      in: query
+      required: false
+      description: Number of items per page.
+      schema:
+        type: integer
+  responses:
+    Error:
+      description: An error response with a 4xx or 5xx status.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            simple:
+              value:
+                error: Forbidden
+            detailed:
+              value:
+                error:
+                  code: item_unavailable
+                  message: SKU123 is no longer available
   securitySchemes:
     basicAuth:
       type: http
