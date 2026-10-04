@@ -137,6 +137,21 @@ paths:
         5XX:
           $ref: '#/components/responses/Error'
 components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Current page number (1-indexed).
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      in: query
+      required: false
+      description: Number of items per page.
+      schema:
+        type: integer
   schemas:
     Store:
       allOf:
@@ -150,6 +165,34 @@ components:
             type: string
             format: uri
             description: Store image URL.
+    Variant:
+      type: object
+      required:
+      - id
+      - title
+      - quantity
+      - price
+      - currency
+      properties:
+        id:
+          $ref: '#/components/schemas/Identifier'
+        title:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: string
+          description: Price as a string without a currency marker
+          e.g. "15.99".: null
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          e.g. USD.: null
+        sale_price:
+          type:
+          - string
+          - 'null'
+          description: Current sale price if the item is on sale, else null.
     Pagination:
       type: object
       properties:
@@ -162,6 +205,16 @@ components:
         total_pages:
           type: integer
           description: Number of pages accessible.
+    Error:
+      type: object
+      required:
+      - error
+      description: Error envelope. `error` may be a simple string or an object with details.
+      properties:
+        error:
+          oneOf:
+          - type: string
+          - type: object
     Merch:
       type: object
       required:
@@ -218,49 +271,6 @@ components:
           description: Size/fit variants; omitted entirely when the item has no variants.
           items:
             $ref: '#/components/schemas/Variant'
-    Error:
-      type: object
-      required:
-      - error
-      description: Error envelope. `error` may be a simple string or an object with details.
-      properties:
-        error:
-          oneOf:
-          - type: string
-          - type: object
-    Variant:
-      type: object
-      required:
-      - id
-      - title
-      - quantity
-      - price
-      - currency
-      properties:
-        id:
-          $ref: '#/components/schemas/Identifier'
-        title:
-          type: string
-        quantity:
-          type: integer
-        price:
-          type: string
-          description: Price as a string without a currency marker
-          e.g. "15.99".: null
-        currency:
-          type: string
-          description: ISO 4217 currency code
-          e.g. USD.: null
-        sale_price:
-          type:
-          - string
-          - 'null'
-          description: Current sale price if the item is on sale, else null.
-    Identifier:
-      description: Object identifier; may be a string or integer (stored as string by Merchbar).
-      oneOf:
-      - type: string
-      - type: integer
     StoreSummary:
       type: object
       required:
@@ -276,21 +286,11 @@ components:
           type: boolean
           description: If false
           the store's merchandise is hidden from Merchbar users.: null
-  parameters:
-    Page:
-      name: page
-      in: query
-      required: false
-      description: Current page number (1-indexed).
-      schema:
-        type: integer
-    PerPage:
-      name: per_page
-      in: query
-      required: false
-      description: Number of items per page.
-      schema:
-        type: integer
+    Identifier:
+      description: Object identifier; may be a string or integer (stored as string by Merchbar).
+      oneOf:
+      - type: string
+      - type: integer
   responses:
     Error:
       description: An error response with a 4xx or 5xx status.
