@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/copthis/integrations
+- https://n8n.io/integrations/copthis/
+- https://composio.dev/toolkits/copthis
+- https://monid.ai/tools/copthis
+checked:
+- https://composio.dev/toolkits/copthis
+- https://monid.ai/tools/copthis
+- https://n8n.io/integrations/copthis/
+- https://zapier.com/apps/copthis/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
